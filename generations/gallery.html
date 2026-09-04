@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generations</title>
+<style>
+  :root {
+    --bg: #0d0d0f; --card: #17171b; --border: #26262c;
+    --text: #e8e8ea; --dim: #8a8a93; --accent: #7c9cff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; padding: 24px; }
+  header { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+  h1 { font-size: 20px; font-weight: 700; }
+  .stats { color: var(--dim); font-size: 13px; }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  select { background: var(--card); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; font-size: 13px; }
+  .grid { columns: 4 260px; column-gap: 14px; }
+  .card { break-inside: avoid; margin-bottom: 14px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer; transition: border-color .15s; }
+  .card:hover { border-color: var(--accent); }
+  .card img, .card video { width: 100%; display: block; }
+  .meta { padding: 8px 10px; display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--dim); }
+  .meta .model { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .meta .cost { color: var(--accent); flex-shrink: 0; }
+  dialog { background: var(--card); color: var(--text); border: 1px solid var(--border); border-radius: 14px; padding: 0; max-width: 860px; width: 92vw; max-height: 90vh; }
+  dialog::backdrop { background: rgba(0,0,0,.75); }
+  .modal-media { max-height: 55vh; display: flex; justify-content: center; background: #000; }
+  .modal-media img, .modal-media video { max-width: 100%; max-height: 55vh; object-fit: contain; }
+  .modal-body { padding: 16px 20px 20px; overflow-y: auto; }
+  .modal-body h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); margin: 14px 0 4px; }
+  .modal-body h3:first-child { margin-top: 0; }
+  .prompt { white-space: pre-wrap; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: 13px; }
+  .kv { display: grid; grid-template-columns: 110px 1fr; gap: 4px 12px; font-size: 13px; }
+  .kv .k { color: var(--dim); }
+  .path { font-family: ui-monospace, monospace; font-size: 12px; word-break: break-all; }
+  button.copy { background: none; border: 1px solid var(--border); color: var(--accent); border-radius: 6px; padding: 2px 8px; font-size: 12px; cursor: pointer; margin-left: 8px; }
+  .close { position: sticky; top: 0; float: right; margin: 10px; background: rgba(0,0,0,.5); border: none; color: #fff; border-radius: 50%; width: 30px; height: 30px; font-size: 16px; cursor: pointer; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Generations</h1>
+  <span class="stats">12 assets · est. $0.84 total</span>
+</header>
+<div class="filters">
+  <select id="f-project"><option value="">All projects</option><option>skinnify-resistance-leggings-matrix</option></select>
+  <select id="f-model"><option value="">All models</option><option>fal-ai/gpt-image-2/edit</option></select>
+</div>
+<div class="grid" id="grid"><div class="card" data-i="0" onclick="openModal(0)"><img src="../copy/skinnify-leggings-variations-2026-09-04/variation-12.png" loading="lazy"><div class="meta"><span class="model">gpt-image-2</span><span class="cost">$0.07</span></div></div><div class="card" data-i="1" onclick="openModal(1)"><img src="../copy/skinnify-leggings-variations-2026-09-04/variation-11.png" loading="lazy"><div class="meta"><span class="model">gpt-image-2</span><span class="cost">$0.07</span></div></div><div class="card" data-i="2" onclick="openModal(2)"><img src="../copy/skinnify-leggings-variations-2026-09-04/variation-10.png" loading="lazy"><div class="meta"><span class="model">gpt-image-2</span><span class="cost">$0.07</span></div></div><div class="card" data-i="3" onclick="openModal(3)"><img src="../copy/skinnify-leggings-variations-2026-09-04/variation-9.png" loading="lazy"><div class="meta"><span class="model">gpt-image-2</span><span class="cost">$0.07</span></div></div><div class="card" data-i="4" onclick="openModal(4)"><img src="../copy/skinnify-leggings-variations-2026-09-04/variation-8.png" loading="lazy"><div class="meta"><span class="model">gpt-image-2</span><span class="cost">$0.07</span></div></div><div class="card" data-i="5" onclick="openModal(5)"><img src="../copy/skinnify-leggings-variations-2026-09-04/variation-7.png" loading="lazy"><div class="meta"><span class="model">gpt-image-2</span><span class="cost">$0.07</span></div></div><div class="card" data-i="6" onclick="openModal(6)"><img src="../copy/skinnify-leggings-variations-2026-09-04/variation-6.png" loading="lazy"><div class="meta"><span class="model">gpt-image-2</span><span class="cost">$0.07</span></div></div><div class="card" data-i="7" onclick="openModal(7)"><img src="../copy/skinnify-leggings-variations-2026-09-04/variation-5.png" loading="lazy"><div class="meta"><span class="model">gpt-image-2</span><span class="cost">$0.07</span></div></div><div class="card" data-i="8" onclick="openModal(8)"><img src="../copy/skinnify-leggings-variations-2026-09-04/variation-4.png" loading="lazy"><div class="meta"><span class="model">gpt-image-2</span><span class="cost">$0.07</span></div></div><div class="card" data-i="9" onclick="openModal(9)"><img src="../copy/skinnify-leggings-variations-2026-09-04/variation-3.png" loading="lazy"><div class="meta"><span class="model">gpt-image-2</span><span class="cost">$0.07</span></div></div><div class="card" data-i="10" onclick="openModal(10)"><img src="../copy/skinnify-leggings-variations-2026-09-04/variation-2.png" loading="lazy"><div class="meta"><span class="model">gpt-image-2</span><span class="cost">$0.07</span></div></div><div class="card" data-i="11" onclick="openModal(11)"><img src="../copy/skinnify-leggings-variations-2026-09-04/variation-1.png" loading="lazy"><div class="meta"><span class="model">gpt-image-2</span><span class="cost">$0.07</span></div></div></div>
+<dialog id="modal">
+  <button class="close" onclick="modal.close()">✕</button>
+  <div class="modal-media" id="m-media"></div>
+  <div class="modal-body">
+    <h3>Prompt</h3><div class="prompt" id="m-prompt"></div>
+    <h3>Details</h3>
+    <div class="kv">
+      <span class="k">Model</span><span id="m-model"></span>
+      <span class="k">Project</span><span id="m-project"></span>
+      <span class="k">Est. cost</span><span id="m-cost"></span>
+      <span class="k">Seed</span><span id="m-seed"></span>
+      <span class="k">Generated</span><span id="m-time"></span>
+      <span class="k">File</span><span class="path"><span id="m-path"></span><button class="copy" onclick="copyPath()">copy</button></span>
+    </div>
+  </div>
+</dialog>
+<script>
+const DATA = [{"src": "../copy/skinnify-leggings-variations-2026-09-04/variation-12.png", "abs_path": "/home/user/Fal-Claude/copy/skinnify-leggings-variations-2026-09-04/variation-12.png", "is_video": false, "prompt": "Keep the exact product, pose, color, and lighting from the reference image unchanged. Replace the background with a flat or subtle warm neutral/blush gradient. Add one bold, large headline as the dominant visual element reading 'More Than Leggings Usually Do'. No other text, no badges, no additional graphics \u2014 maximum simplicity and thumb-stopping legibility.", "endpoint": "fal-ai/gpt-image-2/edit", "project": "skinnify-resistance-leggings-matrix", "cost": 0.07, "seed": null, "timestamp": "2026-09-04T14:40:16"}, {"src": "../copy/skinnify-leggings-variations-2026-09-04/variation-11.png", "abs_path": "/home/user/Fal-Claude/copy/skinnify-leggings-variations-2026-09-04/variation-11.png", "is_video": false, "prompt": "Keep the exact product, pose, color, and lighting from the reference image unchanged. Replace the background with a flat or subtle gradient deep berry/plum color matching the product tone. Add one bold, large headline as the dominant visual element reading 'Consistency You Can Wear'. No other text, no badges, no additional graphics \u2014 maximum simplicity and thumb-stopping legibility.", "endpoint": "fal-ai/gpt-image-2/edit", "project": "skinnify-resistance-leggings-matrix", "cost": 0.07, "seed": null, "timestamp": "2026-09-04T14:40:05"}, {"src": "../copy/skinnify-leggings-variations-2026-09-04/variation-10.png", "abs_path": "/home/user/Fal-Claude/copy/skinnify-leggings-variations-2026-09-04/variation-10.png", "is_video": false, "prompt": "Create a stat-callout card: large bold text 'Up to 30%*' dominating the upper portion of the frame, with a subheading beneath reading 'more calories burned during daily movement'. Below that, include a clearly legible but smaller footnote line reading '*Based on research from a Yale-affiliated lab (John B. Pierce Laboratory) on resistance-band calorie burn. Individual results vary.' Place the exact reference product image, unchanged, small in a corner. Background soft warm neutral. Keep the footnote text fully legible and unmodified.", "endpoint": "fal-ai/gpt-image-2/edit", "project": "skinnify-resistance-leggings-matrix", "cost": 0.07, "seed": null, "timestamp": "2026-09-04T14:40:01"}, {"src": "../copy/skinnify-leggings-variations-2026-09-04/variation-9.png", "abs_path": "/home/user/Fal-Claude/copy/skinnify-leggings-variations-2026-09-04/variation-9.png", "is_video": false, "prompt": "Create a stat-callout card: a very large numeral '8' dominating the upper two-thirds of the frame in bold brand-style type, with a smaller subheading beneath reading 'Built-In Resistance Bands'. Place the exact reference product detail image, unchanged, small in a bottom corner. Background soft warm neutral. No other text or clutter.", "endpoint": "fal-ai/gpt-image-2/edit", "project": "skinnify-resistance-leggings-matrix", "cost": 0.07, "seed": null, "timestamp": "2026-09-04T14:39:58"}, {"src": "../copy/skinnify-leggings-variations-2026-09-04/variation-8.png", "abs_path": "/home/user/Fal-Claude/copy/skinnify-leggings-variations-2026-09-04/variation-8.png", "is_video": false, "prompt": "Create a clean two-column comparison table as the dominant element. Left column header 'Skinnify' (highlighted in deep berry/plum accent color) with checkmarks next to: 'Fits into your day', 'Joint-friendly', 'No burnout cycle', 'Wear it anywhere'. Right column header 'Traditional Workouts' (neutral gray) with X marks for the same rows. Place the exact reference product image, unchanged, beside the table. Add a bold headline above reading 'Less Grind. More Consistency.'. Do not include any real competitor brand name or logo.", "endpoint": "fal-ai/gpt-image-2/edit", "project": "skinnify-resistance-leggings-matrix", "cost": 0.07, "seed": null, "timestamp": "2026-09-04T14:39:16"}, {"src": "../copy/skinnify-leggings-variations-2026-09-04/variation-7.png", "abs_path": "/home/user/Fal-Claude/copy/skinnify-leggings-variations-2026-09-04/variation-7.png", "is_video": false, "prompt": "Create a clean two-column comparison table as the dominant element, taking up most of the frame. Left column header 'Resistance Band Leggings' (highlighted in deep berry/plum accent color) with checkmarks next to: 'Built-in resistance', 'Breathable', 'Machine washable', '14-day returns'. Right column header 'Regular Leggings' (neutral gray) with an X next to 'Built-in resistance' and checkmarks/dashes for the rest. Place the exact reference product image, unchanged, beside or below the table. Add a bold headline above reading 'Not Just Leggings. Built-In Resistance.'. Do not include any real competitor brand name or logo \u2014 'Regular Leggings' is a generic label only.", "endpoint": "fal-ai/gpt-image-2/edit", "project": "skinnify-resistance-leggings-matrix", "cost": 0.07, "seed": null, "timestamp": "2026-09-04T14:39:13"}, {"src": "../copy/skinnify-leggings-variations-2026-09-04/variation-6.png", "abs_path": "/home/user/Fal-Claude/copy/skinnify-leggings-variations-2026-09-04/variation-6.png", "is_video": false, "prompt": "Keep the exact product, pose, color, and lighting from the reference image unchanged, centered in frame. Add four short callout labels connected to the product with thin pointer lines, evenly spaced around it, matching icon style: 'Tone Legs, Glutes & Core', 'Use Anywhere', 'Total Privacy', 'Zero Extra Time'. Add a bold headline above reading 'What If Your Day Was the Workout?'. No other text.", "endpoint": "fal-ai/gpt-image-2/edit", "project": "skinnify-resistance-leggings-matrix", "cost": 0.07, "seed": null, "timestamp": "2026-09-04T14:39:06"}, {"src": "../copy/skinnify-leggings-variations-2026-09-04/variation-5.png", "abs_path": "/home/user/Fal-Claude/copy/skinnify-leggings-variations-2026-09-04/variation-5.png", "is_video": false, "prompt": "Keep the exact product, pose, color, and lighting from the reference image unchanged, centered in frame. Add four short callout labels connected to the product with thin pointer lines, evenly spaced around it, each with a small consistent icon: '8 Built-In Bands', 'Breathable Fabric', 'Machine Washable', '14-Day Returns'. Use a deep berry/plum accent color for the icons and lines to match the product color. Add a bold headline above reading 'Built-In Resistance. Everyday Comfort.' No other text.", "endpoint": "fal-ai/gpt-image-2/edit", "project": "skinnify-resistance-leggings-matrix", "cost": 0.07, "seed": null, "timestamp": "2026-09-04T14:39:04"}, {"src": "../copy/skinnify-leggings-variations-2026-09-04/variation-4.png", "abs_path": "/home/user/Fal-Claude/copy/skinnify-leggings-variations-2026-09-04/variation-4.png", "is_video": false, "prompt": "Create a left/right split composition. Left side: a muted, desaturated abstract icon of a dumbbell fading into outline/transparency (symbolizing burnout), no real gym photography, no people. Right side: keep the exact reference product, pose, color, and lighting in full color, unchanged. Add a bold centered headline at the top reading 'Skip the Burnout Cycle'. No other text.", "endpoint": "fal-ai/gpt-image-2/edit", "project": "skinnify-resistance-leggings-matrix", "cost": 0.07, "seed": null, "timestamp": "2026-09-04T14:38:20"}, {"src": "../copy/skinnify-leggings-variations-2026-09-04/variation-3.png", "abs_path": "/home/user/Fal-Claude/copy/skinnify-leggings-variations-2026-09-04/variation-3.png", "is_video": false, "prompt": "Create a split-layout composition. Top half: desaturated, muted abstract morning-rush cues only (a clock face, a calendar page, soft blurred motion lines) \u2014 no depicted people. Bottom half: keep the exact reference product, pose, color, and lighting in full color, unchanged. Add a bold headline that visually bridges both halves reading 'Turn Your Day Into a Workout'. No other text.", "endpoint": "fal-ai/gpt-image-2/edit", "project": "skinnify-resistance-leggings-matrix", "cost": 0.07, "seed": null, "timestamp": "2026-09-04T14:38:20"}, {"src": "../copy/skinnify-leggings-variations-2026-09-04/variation-2.png", "abs_path": "/home/user/Fal-Claude/copy/skinnify-leggings-variations-2026-09-04/variation-2.png", "is_video": false, "prompt": "Keep the exact product, pose, color, and lighting from the reference image unchanged. Apply a muted warm-toned background treatment. Add a quote-style text overlay near the top reading 'No Gym. No Burnout. Just Movement.' in a softer, conversational typeface (not a bold headline style). Add a small ribbon badge in a corner reading '14-Day Money-Back'. No other text, no additional graphics.", "endpoint": "fal-ai/gpt-image-2/edit", "project": "skinnify-resistance-leggings-matrix", "cost": 0.07, "seed": null, "timestamp": "2026-09-04T14:38:20"}, {"src": "../copy/skinnify-leggings-variations-2026-09-04/variation-1.png", "abs_path": "/home/user/Fal-Claude/copy/skinnify-leggings-variations-2026-09-04/variation-1.png", "is_video": false, "prompt": "Keep the exact product, model pose, fabric texture, color (deep berry/plum 'Amaranth'), and lighting from the reference image unchanged. Add a clean headline overlay near the top third in bold brand-style sans-serif type reading 'Resistance, You Can Wear'. Add a small rounded badge in the bottom-left reading '8 Built-In Bands'. Add a simple button-style CTA in the bottom-right reading 'Shop Now'. Keep background soft warm neutral (matches reference), no other text or clutter.", "endpoint": "fal-ai/gpt-image-2/edit", "project": "skinnify-resistance-leggings-matrix", "cost": 0.07, "seed": null, "timestamp": "2026-09-04T14:38:20"}];
+const modal = document.getElementById('modal');
+let current = null;
+function openModal(i) {
+  current = DATA[i];
+  const m = document.getElementById('m-media');
+  m.innerHTML = current.is_video
+    ? `<video src="${current.src}" controls autoplay loop muted></video>`
+    : `<img src="${current.src}">`;
+  document.getElementById('m-prompt').textContent = current.prompt || '(no prompt logged)';
+  document.getElementById('m-model').textContent = current.endpoint;
+  document.getElementById('m-project').textContent = current.project;
+  document.getElementById('m-cost').textContent = '$' + current.cost.toFixed(2);
+  document.getElementById('m-seed').textContent = current.seed ?? '—';
+  document.getElementById('m-time').textContent = current.timestamp;
+  document.getElementById('m-path').textContent = current.abs_path;
+  modal.showModal();
+}
+function copyPath() { navigator.clipboard.writeText(current.abs_path); }
+function applyFilters() {
+  const p = document.getElementById('f-project').value;
+  const mo = document.getElementById('f-model').value;
+  document.querySelectorAll('.card').forEach(c => {
+    const d = DATA[+c.dataset.i];
+    c.style.display = (!p || d.project === p) && (!mo || d.endpoint === mo) ? '' : 'none';
+  });
+}
+document.getElementById('f-project').onchange = applyFilters;
+document.getElementById('f-model').onchange = applyFilters;
+modal.addEventListener('click', e => { if (e.target === modal) modal.close(); });
+modal.addEventListener('close', () => document.getElementById('m-media').innerHTML = '');
+</script>
+</body>
+</html>
