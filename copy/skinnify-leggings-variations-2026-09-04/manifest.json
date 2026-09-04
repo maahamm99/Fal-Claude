@@ -185,7 +185,7 @@
   ],
   "results": [
     {
-      "timestamp": "2026-09-04T14:19:24",
+      "timestamp": "2026-09-04T14:28:38",
       "project": "skinnify-resistance-leggings-matrix",
       "job_id": "var-1-img",
       "endpoint": "fal-ai/gpt-image-2/edit",
@@ -200,11 +200,11 @@
         "image_size": "portrait_4_3"
       },
       "status": "failed",
-      "error": "403 Forbidden",
-      "elapsed_seconds": 1.5
+      "error": "HTTPSConnectionPool(host='v3b.fal.media', port=443): Max retries exceeded with url: /files/b/0aa9155c/M_6h6wYO2igwaFk3Tww_v_6RUcQn8C.png (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "elapsed_seconds": 49.6
     },
     {
-      "timestamp": "2026-09-04T14:19:24",
+      "timestamp": "2026-09-04T14:28:38",
       "project": "skinnify-resistance-leggings-matrix",
       "job_id": "var-2-img",
       "endpoint": "fal-ai/gpt-image-2/edit",
@@ -219,11 +219,11 @@
         "image_size": "portrait_4_3"
       },
       "status": "failed",
-      "error": "403 Forbidden",
-      "elapsed_seconds": 0.8
+      "error": "HTTPSConnectionPool(host='v3b.fal.media', port=443): Max retries exceeded with url: /files/b/0aa91573/3mVcvM7M50kmKI1RPV2_d_R1YdVFhn.png (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "elapsed_seconds": 48.3
     },
     {
-      "timestamp": "2026-09-04T14:19:24",
+      "timestamp": "2026-09-04T14:28:38",
       "project": "skinnify-resistance-leggings-matrix",
       "job_id": "var-3-img",
       "endpoint": "fal-ai/gpt-image-2/edit",
@@ -238,11 +238,11 @@
         "image_size": "portrait_4_3"
       },
       "status": "failed",
-      "error": "403 Forbidden",
-      "elapsed_seconds": 0.4
+      "error": "HTTPSConnectionPool(host='v3b.fal.media', port=443): Max retries exceeded with url: /files/b/0aa9155c/Bip34FO5hn971QH-LeqGv_sVdvvEuX.png (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "elapsed_seconds": 48.9
     },
     {
-      "timestamp": "2026-09-04T14:19:24",
+      "timestamp": "2026-09-04T14:28:38",
       "project": "skinnify-resistance-leggings-matrix",
       "job_id": "var-4-img",
       "endpoint": "fal-ai/gpt-image-2/edit",
@@ -257,11 +257,11 @@
         "image_size": "portrait_4_3"
       },
       "status": "failed",
-      "error": "403 Forbidden",
-      "elapsed_seconds": 1.1
+      "error": "HTTPSConnectionPool(host='v3b.fal.media', port=443): Max retries exceeded with url: /files/b/0aa9155c/SdhpcQX8Lw966t8TbMYz5_tz7c5IbF.png (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "elapsed_seconds": 45.7
     },
     {
-      "timestamp": "2026-09-04T14:19:24",
+      "timestamp": "2026-09-04T14:29:24",
       "project": "skinnify-resistance-leggings-matrix",
       "job_id": "var-5-img",
       "endpoint": "fal-ai/gpt-image-2/edit",
@@ -276,11 +276,11 @@
         "image_size": "square_hd"
       },
       "status": "failed",
-      "error": "403 Forbidden",
-      "elapsed_seconds": 1.4
+      "error": "HTTPSConnectionPool(host='v3b.fal.media', port=443): Max retries exceeded with url: /files/b/0aa91561/bb3G1KbU0vBeQEX-KDw5p_zVYVv2gO.png (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "elapsed_seconds": 57.7
     },
     {
-      "timestamp": "2026-09-04T14:19:25",
+      "timestamp": "2026-09-04T14:29:26",
       "project": "skinnify-resistance-leggings-matrix",
       "job_id": "var-6-img",
       "endpoint": "fal-ai/gpt-image-2/edit",
@@ -295,11 +295,11 @@
         "image_size": "square_hd"
       },
       "status": "failed",
-      "error": "403 Forbidden",
-      "elapsed_seconds": 1.4
+      "error": "HTTPSConnectionPool(host='v3b.fal.media', port=443): Max retries exceeded with url: /files/b/0aa91560/RL4K7N9xGAvD5pH1epYaz_QC3haECF.png (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "elapsed_seconds": 47.7
     },
     {
-      "timestamp": "2026-09-04T14:19:25",
+      "timestamp": "2026-09-04T14:29:27",
       "project": "skinnify-resistance-leggings-matrix",
       "job_id": "var-7-img",
       "endpoint": "fal-ai/gpt-image-2/edit",
@@ -314,11 +314,11 @@
         "image_size": "square_hd"
       },
       "status": "failed",
-      "error": "403 Forbidden",
-      "elapsed_seconds": 1.8
+      "error": "HTTPSConnectionPool(host='v3b.fal.media', port=443): Max retries exceeded with url: /files/b/0aa91561/KO9vZKmc4IIfnT_Oeh1up_MBrnaFIg.png (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "elapsed_seconds": 60.8
     },
     {
-      "timestamp": "2026-09-04T14:19:26",
+      "timestamp": "2026-09-04T14:29:28",
       "project": "skinnify-resistance-leggings-matrix",
       "job_id": "var-8-img",
       "endpoint": "fal-ai/gpt-image-2/edit",
@@ -333,11 +333,11 @@
         "image_size": "square_hd"
       },
       "status": "failed",
-      "error": "403 Forbidden",
-      "elapsed_seconds": 1.7
+      "error": "HTTPSConnectionPool(host='v3b.fal.media', port=443): Max retries exceeded with url: /files/b/0aa91561/nrQfOjgpJUzG_daekxKY6_1rzyyvPh.png (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "elapsed_seconds": 54.9
     },
     {
-      "timestamp": "2026-09-04T14:19:26",
+      "timestamp": "2026-09-04T14:30:14",
       "project": "skinnify-resistance-leggings-matrix",
       "job_id": "var-9-img",
       "endpoint": "fal-ai/gpt-image-2/edit",
@@ -352,11 +352,11 @@
         "image_size": "square_hd"
       },
       "status": "failed",
-      "error": "403 Forbidden",
-      "elapsed_seconds": 1.8
+      "error": "HTTPSConnectionPool(host='v3b.fal.media', port=443): Max retries exceeded with url: /files/b/0aa91565/G4Q9xVNNtlAf7Ypnu1F3E_WVp2rN0j.png (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "elapsed_seconds": 45.6
     },
     {
-      "timestamp": "2026-09-04T14:19:26",
+      "timestamp": "2026-09-04T14:30:21",
       "project": "skinnify-resistance-leggings-matrix",
       "job_id": "var-10-img",
       "endpoint": "fal-ai/gpt-image-2/edit",
@@ -371,11 +371,11 @@
         "image_size": "square_hd"
       },
       "status": "failed",
-      "error": "403 Forbidden",
-      "elapsed_seconds": 1.7
+      "error": "HTTPSConnectionPool(host='v3b.fal.media', port=443): Max retries exceeded with url: /files/b/0aa91566/TAKAX_KCgtnD2HJhyPDMZ_WAycNTPf.png (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "elapsed_seconds": 48.5
     },
     {
-      "timestamp": "2026-09-04T14:19:27",
+      "timestamp": "2026-09-04T14:30:22",
       "project": "skinnify-resistance-leggings-matrix",
       "job_id": "var-11-img",
       "endpoint": "fal-ai/gpt-image-2/edit",
@@ -390,11 +390,11 @@
         "image_size": "portrait_4_3"
       },
       "status": "failed",
-      "error": "403 Forbidden",
-      "elapsed_seconds": 1.4
+      "error": "HTTPSConnectionPool(host='v3b.fal.media', port=443): Max retries exceeded with url: /files/b/0aa91566/NQN4aGbDuIRBu6yoqx6sK_AOOTdlxl.png (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "elapsed_seconds": 45.5
     },
     {
-      "timestamp": "2026-09-04T14:19:27",
+      "timestamp": "2026-09-04T14:30:28",
       "project": "skinnify-resistance-leggings-matrix",
       "job_id": "var-12-img",
       "endpoint": "fal-ai/gpt-image-2/edit",
@@ -409,9 +409,9 @@
         "image_size": "portrait_4_3"
       },
       "status": "failed",
-      "error": "403 Forbidden",
-      "elapsed_seconds": 1.6
+      "error": "HTTPSConnectionPool(host='v3b.fal.media', port=443): Max retries exceeded with url: /files/b/0aa91567/iw8EbiVWeYyI8aX9tHrIa_kDi7QhKr.png (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "elapsed_seconds": 47.4
     }
   ],
-  "completed_at": "2026-09-04T14:19:29"
+  "completed_at": "2026-09-04T14:31:15"
 }
