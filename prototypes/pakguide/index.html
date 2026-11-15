@@ -204,13 +204,17 @@ body {
 <body>
 <div id="root"></div>
 <script>
+let lid = 0;
 function logo(size, onDark) {
-  const pin = onDark ? "#FBF8EE" : "#0E3B24";
-  const mark = onDark ? "#0E3B24" : "#FBF8EE";
+  const g = onDark ? "#FBF8EE" : "#0E3B24", w = onDark ? "#0E3B24" : "#FBF8EE", k = "pg" + (lid++);
+  const pin = "M24 2.5c-9.6 0-17.2 7.5-17.2 16.9C6.8 31.6 24 45.5 24 45.5s17.2-13.9 17.2-26.1C41.2 10 33.6 2.5 24 2.5z";
   return `<svg width="${size}" height="${size}" viewBox="0 0 48 48" aria-label="PakGuide logo">
-    <path d="M24 3c-9.4 0-17 7.4-17 16.6C7 31.7 24 45 24 45s17-13.3 17-25.4C41 10.4 33.4 3 24 3z" fill="${pin}"/>
-    <circle cx="24" cy="19.5" r="10.5" fill="${mark}"/><circle cx="27.4" cy="17.6" r="8.6" fill="${pin}"/>
-    <path d="M29.6 12.6l1.2 2.7 2.9.3-2.2 1.9.7 2.9-2.6-1.5-2.5 1.5.6-2.9-2.2-1.9 2.9-.3z" fill="${mark}"/></svg>`;
+    <defs><clipPath id="${k}p"><path d="${pin}"/></clipPath>
+    <mask id="${k}m"><rect width="48" height="48" fill="#fff"/><circle cx="30.4" cy="16.6" r="7.3" fill="#000"/></mask></defs>
+    <g clip-path="url(#${k}p)"><rect width="48" height="48" fill="${g}"/><rect width="15.5" height="48" fill="${w}"/></g>
+    <path d="${pin}" fill="none" stroke="${g}" stroke-width="1.4"/>
+    <circle cx="27.6" cy="19.6" r="8.6" fill="${w}" mask="url(#${k}m)"/>
+    <path transform="translate(32.2 14.6) rotate(18) scale(.62)" d="M0-5l1.18 3.38 3.58.07-2.85 2.17 1.03 3.43L0 2.02l-2.94 2.03 1.03-3.43-2.85-2.17 3.58-.07z" fill="${w}"/></svg>`;
 }
 // hand-drawn tick, slightly different each time
 let seed = 3;
@@ -223,7 +227,7 @@ const sq = (on) => `<span class="sq">${on ? tick() : ""}</span>`;
 
 function mast(urdu) {
   return `<header class="mast">
-    <div class="name">${logo(40)}<div><b>PakGuide</b><small>Govt. paperwork, decoded</small></div></div>
+    <div class="name">${logo(46)}<div><b>PakGuide</b><small>Govt. paperwork, decoded</small></div></div>
     <div class="mid">Lahore edition · Sat 15 Nov 2026 · Free of charge</div>
     <div class="lang"><span class="${urdu ? "" : "on"}">ENG</span><span class="u ${urdu ? "on" : ""}">اردو</span></div>
   </header>`;
@@ -242,13 +246,13 @@ const views = {
     return `<div style="height:100vh;display:grid;grid-template-columns:1fr 1fr;background:var(--folder);position:relative;overflow:hidden">
       <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg, rgba(90,70,30,0.05) 0 2px, transparent 2px 5px)"></div>
       <div style="display:grid;place-items:center;position:relative">
-        <svg width="460" height="460" viewBox="0 0 460 460" style="transform:rotate(-8deg);mix-blend-mode:multiply;opacity:.9">
+        <svg width="460" height="460" viewBox="0 0 460 460" style="transform:rotate(-8deg)">
           <defs><path id="c" d="M230 230 m-170 0 a170 170 0 1 1 340 0 a170 170 0 1 1 -340 0"/></defs>
           <circle cx="230" cy="230" r="212" fill="none" stroke="#0E3B24" stroke-width="7"/>
           <circle cx="230" cy="230" r="196" fill="none" stroke="#0E3B24" stroke-width="2"/>
           <circle cx="230" cy="230" r="132" fill="none" stroke="#0E3B24" stroke-width="2"/>
           <text font-family="Type" font-size="27" font-weight="600" letter-spacing="7" fill="#0E3B24"><textPath href="#c">${ring}${ring}</textPath></text>
-          <g transform="translate(150 140) scale(3.4)">${logo(48).replace(/<svg[^>]*>|<\/svg>/g, "")}</g>
+          <circle cx="230" cy="230" r="131" fill="#FBF8EE"/><g transform="translate(149 144) scale(3.4)">${logo(48).replace(/<svg[^>]*>|<\/svg>/g, "")}</g>
         </svg>
       </div>
       <div style="display:flex;flex-direction:column;justify-content:center;gap:18px;padding-right:80px;position:relative">
@@ -385,7 +389,7 @@ const views = {
     </div></section>`;
   },
 };
-function render() { seed = 3; const k = (location.hash || "#home").slice(1); document.getElementById("root").innerHTML = (views[k] || views.home)(); }
+function render() { seed = 3; lid = 0; const k = (location.hash || "#home").slice(1); document.getElementById("root").innerHTML = (views[k] || views.home)(); }
 window.addEventListener("hashchange", render); render();
 </script>
 </body>
