@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PakGuide — government paperwork, step by step</title>
+<style>
+@font-face { font-family: "Inter"; font-weight: 400; src: url(fonts/inter-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Inter"; font-weight: 500; src: url(fonts/inter-latin-500-normal.woff2) format("woff2"); }
+@font-face { font-family: "Inter"; font-weight: 600; src: url(fonts/inter-latin-600-normal.woff2) format("woff2"); }
+@font-face { font-family: "Inter"; font-weight: 700; src: url(fonts/inter-latin-700-normal.woff2) format("woff2"); }
+@font-face { font-family: "Naskh"; font-weight: 400; src: url(fonts/noto-naskh-arabic-arabic-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Naskh"; font-weight: 600; src: url(fonts/noto-naskh-arabic-arabic-600-normal.woff2) format("woff2"); }
+
+:root {
+  --green-900: #01411C;   /* flag green */
+  --green-700: #0A6B39;
+  --green-600: #11834A;
+  --green-100: #E3F1E8;
+  --green-50:  #F1F8F3;
+  --ink: #0F1A14;
+  --body: #3D4A42;
+  --muted: #74817A;
+  --line: #E1E7E2;
+  --paper: #FAFAF6;
+  --white: #FFFFFF;
+  --gold: #D6A936;
+  --red: #C2412D;
+  --amber: #C57A12;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { font-family: "Inter", system-ui, sans-serif; color: var(--ink); background: var(--paper); -webkit-font-smoothing: antialiased; }
+.ur { font-family: "Naskh", "Inter", serif; direction: rtl; text-align: right; line-height: 1.9; }
+
+/* ---------- app shell ---------- */
+.app { display: grid; grid-template-columns: 284px 1fr; height: 100vh; }
+.side { background: var(--green-900); color: #EAF4EC; display: flex; flex-direction: column; padding: 22px 18px; gap: 22px; }
+.brand { display: flex; align-items: center; gap: 10px; padding: 0 6px; }
+.brand b { font-size: 20px; letter-spacing: -0.02em; font-weight: 700; color: #fff; }
+.brand small { display: block; font-size: 11px; color: #A9C9B3; letter-spacing: 0.02em; margin-top: 1px; }
+.newq { display: flex; align-items: center; gap: 10px; background: #fff; color: var(--green-900); border-radius: 12px; padding: 12px 14px; font-weight: 600; font-size: 14px; }
+.side h6 { margin: 0 6px 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #8FB59B; }
+.side ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.side li { display: flex; align-items: center; gap: 10px; padding: 9px 8px; border-radius: 10px; font-size: 14px; color: #D7E8DC; }
+.side li.on { background: rgba(255,255,255,0.10); color: #fff; }
+.side li .dot { width: 6px; height: 6px; border-radius: 99px; background: #4FB37A; flex-shrink: 0; }
+.side .foot { margin-top: auto; display: flex; align-items: center; gap: 10px; padding: 10px 8px; border-top: 1px solid rgba(255,255,255,0.10); font-size: 13px; color: #BFD8C6; }
+.avatar { width: 30px; height: 30px; border-radius: 99px; background: var(--gold); color: var(--green-900); display: grid; place-items: center; font-weight: 700; font-size: 13px; }
+
+.main { display: flex; flex-direction: column; min-width: 0; height: 100vh; }
+.top { display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; border-bottom: 1px solid var(--line); background: var(--white); }
+.top .title { font-weight: 600; font-size: 15px; }
+.top .title span { color: var(--muted); font-weight: 400; margin-left: 8px; font-size: 13px; }
+.lang { display: flex; background: var(--green-50); border: 1px solid var(--line); border-radius: 99px; padding: 3px; font-size: 13px; }
+.lang span { padding: 5px 12px; border-radius: 99px; color: var(--muted); font-weight: 500; }
+.lang span.on { background: var(--green-700); color: #fff; }
+.lang span.urdu { font-family: "Naskh", serif; font-size: 14px; line-height: 1.1; }
+
+.scroll { flex: 1; overflow: hidden; padding: 28px 32px 8px; }
+.thread { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 22px; }
+
+.msg-user { align-self: flex-end; max-width: 78%; background: var(--green-700); color: #fff; padding: 13px 18px; border-radius: 20px 20px 6px 20px; font-size: 15.5px; line-height: 1.5; box-shadow: 0 1px 2px rgba(1,65,28,0.18); }
+.msg-user.ur { border-radius: 20px 20px 20px 6px; font-size: 19px; line-height: 1.7; }
+.msg-bot { display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: start; }
+.bot-ico { width: 36px; height: 36px; border-radius: 12px; background: var(--green-100); display: grid; place-items: center; }
+.bot-body { font-size: 15px; line-height: 1.6; color: var(--body); display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.bot-body p { margin: 0; }
+.bot-body strong { color: var(--ink); font-weight: 600; }
+
+.card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; }
+.card h4 { margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--green-700); display: flex; align-items: center; gap: 8px; }
+.steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.steps li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 9px 0; border-top: 1px solid var(--line); }
+.steps li:first-child { border-top: none; padding-top: 2px; }
+.steps .n { width: 24px; height: 24px; border-radius: 99px; background: var(--green-50); border: 1px solid #CFE4D6; color: var(--green-700); font-size: 12px; font-weight: 600; display: grid; place-items: center; margin-top: 1px; }
+.steps b { display: block; color: var(--ink); font-weight: 600; font-size: 14.5px; }
+.steps span { font-size: 13.5px; color: var(--muted); }
+.check { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 18px; }
+.check li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--ink); }
+.box { width: 18px; height: 18px; border-radius: 5px; border: 1.5px solid #B9CEC0; flex-shrink: 0; margin-top: 2px; display: grid; place-items: center; }
+.box.on { background: var(--green-600); border-color: var(--green-600); }
+.row { display: flex; gap: 12px; flex-wrap: wrap; }
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.fact { background: var(--green-50); border: 1px solid #D7EADD; border-radius: 14px; padding: 12px 14px; }
+.fact small { display: block; font-size: 11.5px; color: var(--muted); letter-spacing: 0.02em; }
+.fact b { display: block; font-size: 15px; color: var(--ink); margin-top: 3px; font-weight: 600; }
+.place { display: grid; grid-template-columns: 54px 1fr auto; gap: 14px; align-items: center; }
+.map { width: 54px; height: 54px; border-radius: 12px; background: linear-gradient(135deg, #DDEFE3, #C8E3D1); position: relative; overflow: hidden; }
+.map:before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent 0 9px, rgba(255,255,255,0.55) 9px 11px); }
+.map:after { content: ""; position: absolute; left: 21px; top: 15px; width: 12px; height: 12px; border-radius: 99px 99px 99px 0; transform: rotate(-45deg); background: var(--red); box-shadow: 0 0 0 3px #fff; }
+.place b { display: block; font-size: 14.5px; color: var(--ink); font-weight: 600; }
+.place span { font-size: 13px; color: var(--muted); }
+.open { font-size: 12px; font-weight: 600; color: var(--green-700); background: var(--green-100); padding: 4px 10px; border-radius: 99px; }
+.note { display: flex; gap: 10px; align-items: flex-start; background: #FFF8E8; border: 1px solid #F1E2B5; color: #6B5310; border-radius: 12px; padding: 10px 14px; font-size: 13.5px; }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { border: 1px solid #CDE0D3; background: var(--white); color: var(--green-700); border-radius: 99px; padding: 8px 14px; font-size: 13.5px; font-weight: 500; }
+.chip.ur { font-size: 15px; padding: 4px 14px; }
+
+.composer { padding: 14px 32px 22px; }
+.composer .bar { max-width: 780px; margin: 0 auto; display: flex; align-items: center; gap: 10px; background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 10px 10px 10px 18px; box-shadow: 0 6px 24px rgba(1,65,28,0.06); }
+.composer .ph { flex: 1; color: #9AA59E; font-size: 15px; }
+.icon-btn { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; color: var(--muted); }
+.send { background: var(--green-700); color: #fff; }
+.composer .hint { max-width: 780px; margin: 8px auto 0; font-size: 12px; color: var(--muted); text-align: center; }
+
+/* ---------- home ---------- */
+.home { flex: 1; overflow: hidden; padding: 56px 32px 20px; }
+.home-in { max-width: 860px; margin: 0 auto; }
+.salaam { display: inline-flex; align-items: center; gap: 10px; background: var(--green-100); color: var(--green-700); border-radius: 99px; padding: 6px 14px 6px 8px; font-size: 13px; font-weight: 600; }
+.salaam .ur { font-size: 15px; line-height: 1.2; }
+.home h1 { font-size: 44px; line-height: 1.12; letter-spacing: -0.03em; margin: 18px 0 10px; font-weight: 700; }
+.home h1 em { font-style: normal; color: var(--green-700); }
+.home .lede { font-size: 17px; color: var(--muted); margin: 0 0 28px; max-width: 620px; line-height: 1.55; }
+.search { display: flex; align-items: center; gap: 12px; background: var(--white); border: 1.5px solid var(--green-700); border-radius: 18px; padding: 10px 10px 10px 20px; box-shadow: 0 0 0 6px var(--green-50); }
+.search .ph { flex: 1; font-size: 16.5px; color: var(--ink); }
+.search .ph i { color: #9AA59E; font-style: normal; }
+.cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 30px; }
+.cat { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.cat .ic { width: 38px; height: 38px; border-radius: 11px; background: var(--green-50); display: grid; place-items: center; color: var(--green-700); }
+.cat b { font-size: 14.5px; font-weight: 600; }
+.cat span { font-size: 12.5px; color: var(--muted); }
+.pop { margin-top: 30px; }
+.pop h6 { margin: 0 0 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.pop .q { display: flex; align-items: center; justify-content: space-between; padding: 13px 2px; border-top: 1px solid var(--line); font-size: 15px; }
+.pop .q span { color: var(--muted); font-size: 13px; }
+
+/* ---------- checklist ---------- */
+.track { flex: 1; overflow: hidden; padding: 32px; }
+.track-in { max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: 1.45fr 1fr; gap: 20px; align-items: start; }
+.progress { height: 8px; background: var(--green-50); border-radius: 99px; overflow: hidden; margin: 12px 0 4px; }
+.progress div { height: 100%; width: 60%; background: linear-gradient(90deg, var(--green-600), #3FAF6E); border-radius: 99px; }
+.titem { display: grid; grid-template-columns: 22px 1fr auto; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line); align-items: start; }
+.titem b { display: block; font-size: 14.5px; font-weight: 600; }
+.titem span { font-size: 13px; color: var(--muted); }
+.titem.done b { color: var(--muted); text-decoration: line-through; text-decoration-color: #B5C4BA; }
+.tag { font-size: 11.5px; font-weight: 600; padding: 3px 9px; border-radius: 99px; background: var(--green-50); color: var(--green-700); white-space: nowrap; }
+.tag.warn { background: #FFF3DD; color: var(--amber); }
+
+/* ---------- phone ---------- */
+@media (max-width: 600px) {
+  .app { grid-template-columns: 1fr; }
+  .side { display: none; }
+  .top { padding: 14px 18px; }
+  .scroll { padding: 18px 16px 4px; }
+  .msg-user { max-width: 88%; font-size: 15px; }
+  .msg-bot { grid-template-columns: 1fr; gap: 8px; }
+  .bot-ico { width: 30px; height: 30px; border-radius: 10px; }
+  .check { grid-template-columns: 1fr; }
+  .facts { grid-template-columns: 1fr 1fr; }
+  .composer { padding: 10px 14px 18px; }
+  .composer .hint { display: none; }
+  .home { padding: 28px 18px; }
+  .home h1 { font-size: 32px; }
+  .cats { grid-template-columns: 1fr 1fr; }
+  .track { padding: 18px 16px; }
+  .track-in { grid-template-columns: 1fr; }
+  .mbrand { display: flex !important; }
+  .db { display: none; }
+  .top .title.desk { display: none; }
+}
+.db { display: inline; }
+.mbrand { display: none; align-items: center; gap: 8px; font-weight: 700; font-size: 17px; letter-spacing: -0.02em; color: var(--green-900); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script>
+// ---------- logo: a map pin in flag green holding a white crescent and star ----------
+function logo(size, onDark) {
+  const pin = onDark ? "#FFFFFF" : "#01411C";
+  const mark = onDark ? "#01411C" : "#FFFFFF";
+  return `<svg width="${size}" height="${size}" viewBox="0 0 48 48" aria-label="PakGuide logo">
+    <path d="M24 3c-9.4 0-17 7.4-17 16.6C7 31.7 24 45 24 45s17-13.3 17-25.4C41 10.4 33.4 3 24 3z" fill="${pin}"/>
+    <circle cx="24" cy="19.5" r="10.5" fill="${mark}"/>
+    <circle cx="27.4" cy="17.6" r="8.6" fill="${pin}"/>
+    <path d="M29.6 12.6l1.2 2.7 2.9.3-2.2 1.9.7 2.9-2.6-1.5-2.5 1.5.6-2.9-2.2-1.9 2.9-.3z" fill="${mark}"/>
+  </svg>`;
+}
+const I = {
+  plus: '<svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+  mic: '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="6" y="2" width="6" height="10" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 9a5.5 5.5 0 0011 0M9 14.5V16.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  send: '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h11M10 4.5L14.5 9 10 13.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  clip: '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M12.5 6.5l-5 5a2 2 0 01-2.8-2.8l5.5-5.5a3.2 3.2 0 014.5 4.5L9 13.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  tick: '<svg width="11" height="11" viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3 4.7-4.9" stroke="#fff" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  id: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="4.5" width="15" height="11" rx="2.5" stroke="currentColor" stroke-width="1.6"/><circle cx="7.5" cy="10" r="2" stroke="currentColor" stroke-width="1.5"/><path d="M11.5 8.5h3.5M11.5 11.5h2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+  pass: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="4.5" y="2.5" width="11" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="10" cy="9" r="2.6" stroke="currentColor" stroke-width="1.5"/><path d="M7.5 14h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+  car: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3.5 12.5l1.4-4.2A2 2 0 016.8 7h6.4a2 2 0 011.9 1.3l1.4 4.2V15h-13v-2.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="currentColor"/><circle cx="13.5" cy="13" r="1" fill="currentColor"/></svg>',
+  home: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3.5 9L10 3.5 16.5 9v7.5h-13V9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 16.5v-4h4v4" stroke="currentColor" stroke-width="1.6"/></svg>',
+  shield: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2.5l6 2.3v4.6c0 3.9-2.6 6.8-6 8.1-3.4-1.3-6-4.2-6-8.1V4.8l6-2.3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7.5 10l1.8 1.8 3.3-3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  baby: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="8" r="4.5" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 17c1.2-2.4 3.2-3.5 5.5-3.5s4.3 1.1 5.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  ring: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="8" cy="11.5" r="4.5" stroke="currentColor" stroke-width="1.6"/><circle cx="12.5" cy="8.5" r="4.5" stroke="currentColor" stroke-width="1.6"/></svg>',
+  doc: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5.5 2.5h6l3.5 3.5v11.5h-9.5v-15z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 10h5M8 13h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+  pin: '<svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1.5a4 4 0 00-4 4C3 8.6 7 12.5 7 12.5s4-3.9 4-7a4 4 0 00-4-4z" fill="currentColor"/></svg>',
+  clock: '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.2" stroke="currentColor" stroke-width="1.4"/><path d="M7 4.2V7l2 1.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>',
+  info: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:2px"><circle cx="8" cy="8" r="6.3" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6M8 5.2v.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+};
+
+function side(active) {
+  const recent = [
+    ["cnic", "Renew my CNIC"],
+    ["passport", "بچے کا پاسپورٹ", true],
+    ["licence", "Learner driving licence"],
+    ["domicile", "Domicile for university"],
+  ];
+  return `<aside class="side">
+    <div class="brand">${logo(36, true)}<div><b>PakGuide</b><small>Paperwork, step by step</small></div></div>
+    <div class="newq">${I.plus} New question</div>
+    <div><h6>Recent</h6><ul>
+      ${recent.map(([k, t, ur]) => `<li class="${k === active ? "on" : ""}"><span class="dot"></span><span class="${ur ? "ur" : ""}" style="${ur ? "font-size:15px;line-height:1.3" : ""}">${t}</span></li>`).join("")}
+    </ul></div>
+    <div><h6>My checklists</h6><ul>
+      <li class="${active === "track" ? "on" : ""}"><span class="dot" style="background:#D6A936"></span>Passport renewal · 3/5</li>
+      <li><span class="dot" style="background:#4FB37A"></span>CNIC renewal · done</li>
+    </ul></div>
+    <div class="foot"><div class="avatar">AK</div>Amara Khan · Lahore</div>
+  </aside>`;
+}
+function topBar(title, sub, urdu) {
+  return `<div class="top">
+    <div class="mbrand">${logo(28)}PakGuide</div>
+    <div class="title desk">${title}<span>${sub}</span></div>
+    <div class="lang"><span class="${urdu ? "" : "on"}">EN</span><span class="urdu ${urdu ? "on" : ""}">اردو</span></div>
+  </div>`;
+}
+function composer(ph, urdu) {
+  return `<div class="composer"><div class="bar">
+    <span class="icon-btn">${I.clip}</span>
+    <span class="ph ${urdu ? "ur" : ""}" style="${urdu ? "font-size:17px;line-height:1.4" : ""}">${ph}</span>
+    <span class="icon-btn">${I.mic}</span><span class="icon-btn send">${I.send}</span>
+  </div><div class="hint">PakGuide explains official steps in plain language. Always confirm fees on the official website before you go.</div></div>`;
+}
+const botIco = `<div class="bot-ico">${logo(22)}</div>`;
+const box = (on) => `<span class="box ${on ? "on" : ""}">${on ? I.tick : ""}</span>`;
+
+const views = {
+  brand() {
+    return `<div style="height:100vh;display:grid;place-items:center;background:radial-gradient(120% 90% at 30% 20%, #0F7A43 0%, #01411C 62%);color:#fff;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 22px)"></div>
+      <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:22px">
+        <div style="width:168px;height:168px;border-radius:44px;background:#fff;display:grid;place-items:center;box-shadow:0 24px 60px rgba(0,0,0,0.25)">${logo(118)}</div>
+        <div style="font-size:64px;font-weight:700;letter-spacing:-0.04em;line-height:1">PakGuide</div>
+        <div class="ur" style="font-size:30px;line-height:1.2;color:#BFE3CB;direction:rtl;text-align:center">پاک گائیڈ · ہر کاغذی کام، قدم بہ قدم</div>
+        <div style="display:flex;gap:10px;margin-top:6px">
+          ${["#01411C","#0A6B39","#11834A","#E3F1E8","#FFFFFF","#D6A936"].map(c => `<span style="width:40px;height:40px;border-radius:12px;background:${c};border:1px solid rgba(255,255,255,0.35)"></span>`).join("")}
+        </div>
+      </div></div>`;
+  },
+
+  home() {
+    const cats = [
+      [I.id, "CNIC / Smart card", "New, renew, modify"],
+      [I.pass, "Passport", "First, renew, child"],
+      [I.car, "Driving licence", "Learner, permanent"],
+      [I.home, "Domicile", "University, jobs"],
+      [I.shield, "Police certificate", "Character, abroad"],
+      [I.baby, "Birth certificate", "Union council, B-form"],
+      [I.ring, "Marriage certificate", "Registration, NADRA"],
+      [I.doc, "Property & fard", "Land records, transfer"],
+    ];
+    return `<div class="app">${side("")}<main class="main">${topBar("Home", "", false)}
+      <div class="home"><div class="home-in">
+        <span class="salaam"><span class="ur">السلام علیکم</span> Welcome back, Amara</span>
+        <h1>Which government task can I<br class="db"> <em>walk you through</em> today?</h1>
+        <p class="lede">Ask in English or Urdu. PakGuide tells you the documents to bring, the office to visit and every step in order, so you only make the trip once.</p>
+        <div class="search"><span class="ph">How do I renew my CNIC<i> before it expires?</i></span><span class="icon-btn">${I.mic}</span><span class="icon-btn send">${I.send}</span></div>
+        <div class="cats">${cats.map(([ic, b, s]) => `<div class="cat"><span class="ic">${ic}</span><div><b>${b}</b><br><span>${s}</span></div></div>`).join("")}</div>
+        <div class="pop"><h6>Popular this week</h6>
+          <div class="q">Can I apply for a passport without visiting the office?<span>Passport →</span></div>
+          <div class="q">What do I need for a learner driving licence in Lahore?<span>Licence →</span></div>
+          <div class="q">How do I get a B-form for my newborn?<span>NADRA →</span></div>
+        </div>
+      </div></div></main></div>`;
+  },
+
+  cnic() {
+    return `<div class="app">${side("cnic")}<main class="main">${topBar("Renew my CNIC", "NADRA · Smart card", false)}
+      <div class="scroll"><div class="thread">
+        <div class="msg-user">My CNIC expires next month. How do I renew it, and do I have to go to an office?</div>
+        <div class="msg-bot">${botIco}<div class="bot-body">
+          <p>You can renew it <strong>online through NADRA's Pak-ID app</strong> or in person at a NADRA Registration Centre. Online is usually quickest if your details haven't changed.</p>
+          <div class="card"><h4>Steps, in order</h4><ol class="steps">
+            <li><span class="n">1</span><div><b>Open Pak-ID and choose “Renew ID card”</b><span>Sign in with your mobile number and current CNIC.</span></div></li>
+            <li><span class="n">2</span><div><b>Take your photo and fingerprints in the app</b><span>Good light, plain wall behind you, no glasses.</span></div></li>
+            <li><span class="n">3</span><div><b>Pick delivery speed and pay the fee</b><span>Normal, urgent or executive. Pay by card or mobile wallet.</span></div></li>
+            <li><span class="n">4</span><div><b>Track the status and wait for courier delivery</b><span>You'll get SMS updates at each stage.</span></div></li>
+          </ol></div>
+          <div class="card"><h4>Keep these ready</h4><ul class="check">
+            <li>${box(true)}Current CNIC (expiring is fine)</li><li>${box(true)}Mobile number in your name</li>
+            <li>${box(false)}Debit card or JazzCash / Easypaisa</li><li>${box(false)}Postal address for delivery</li>
+          </ul></div>
+          <div class="facts">
+            <div class="fact"><small>Usually takes</small><b>1–4 weeks</b></div>
+            <div class="fact"><small>Fee</small><b>By delivery speed</b></div>
+            <div class="fact"><small>Visit needed?</small><b>No, if online</b></div>
+          </div>
+          <div class="chips"><span class="chip">Show me the in-person route</span><span class="chip">Add this to my checklist</span><span class="chip">What if my address changed?</span></div>
+        </div></div>
+      </div></div>${composer("Ask a follow-up…", false)}</main></div>`;
+  },
+
+  passport() {
+    return `<div class="app">${side("passport")}<main class="main">${topBar("بچے کا پاسپورٹ", "Passport · in Urdu", true)}
+      <div class="scroll"><div class="thread">
+        <div class="msg-user ur">میرے بیٹے کی عمر ۷ سال ہے۔ اس کا پاسپورٹ بنوانے کے لیے کیا چاہیے؟</div>
+        <div class="msg-bot">${botIco}<div class="bot-body ur" style="font-size:17px">
+          <p>بچے کے پاسپورٹ کے لیے <strong>بچے کا ب-فارم</strong> اور <strong>والدین کے شناختی کارڈ</strong> ضروری ہیں۔ بچے کو ساتھ لے کر جانا ہوگا تاکہ تصویر لی جا سکے۔</p>
+          <div class="card"><h4 style="font-family:Inter;direction:ltr;justify-content:flex-end">Documents · دستاویزات</h4><ul class="check" style="direction:rtl">
+            <li>${box(true)}بچے کا ب-فارم (نادرا)</li><li>${box(true)}والد کا شناختی کارڈ</li>
+            <li>${box(false)}والدہ کا شناختی کارڈ</li><li>${box(false)}پرانا پاسپورٹ، اگر ہو</li>
+          </ul></div>
+          <div class="card"><h4 style="font-family:Inter;direction:ltr;justify-content:flex-end">Where to go · کہاں جائیں</h4>
+            <div class="place" style="direction:ltr;text-align:left;font-family:Inter;line-height:1.5"><div class="map"></div><div><b>Regional Passport Office, Garden Town</b><span>${I.pin} 3.2 km · Lahore</span></div><span class="open">Open now</span></div>
+          </div>
+          <div class="note" style="direction:rtl">${I.info}<span>والدین میں سے ایک کا ساتھ ہونا لازمی ہے۔ فیس آن لائن چیک کر لیں۔</span></div>
+          <div class="chips" style="direction:rtl"><span class="chip ur">چیک لسٹ میں شامل کریں</span><span class="chip ur">فیس کتنی ہے؟</span><span class="chip ur">آن لائن اپلائی</span></div>
+        </div></div>
+      </div></div>${composer("اپنا سوال یہاں لکھیں…", true)}</main></div>`;
+  },
+
+  licence() {
+    return `<div class="app">${side("licence")}<main class="main">${topBar("Learner driving licence", "Punjab · Traffic police", false)}
+      <div class="scroll"><div class="thread">
+        <div class="msg-user">I'm 19 and live in Lahore. What do I need for a learner's licence for a car?</div>
+        <div class="msg-bot">${botIco}<div class="bot-body">
+          <p>At 18+ you can get a <strong>learner permit</strong>. In Punjab you can apply online or at a licensing centre, then you'll take a short <strong>sign test</strong>.</p>
+          <div class="card"><h4>What to bring</h4><ul class="check">
+            <li>${box(true)}Original CNIC + copy</li><li>${box(true)}Medical certificate</li>
+            <li>${box(false)}Fee paid at the bank or online</li><li>${box(false)}Two recent photos</li>
+          </ul></div>
+          <div class="card"><h4>Nearest centre</h4>
+            <div class="place"><div class="map"></div><div><b>Driving Licence Centre, Liberty</b><span>${I.pin} 1.8 km · ${I.clock} Mon–Sat, 9 am – 4 pm</span></div><span class="open">Open now</span></div>
+          </div>
+          <div class="note">${I.info}<span>Your learner permit is valid for six weeks. After that you can book the driving test for a permanent licence.</span></div>
+          <div class="chips"><span class="chip">Practice the sign test</span><span class="chip">Book a token</span></div>
+        </div></div>
+      </div></div>${composer("Ask a follow-up…", false)}</main></div>`;
+  },
+
+  track() {
+    const items = [
+      [true, "Check old passport and CNIC dates", "Both valid · checked 12 Mar", ""],
+      [true, "Fill the online renewal form", "Submitted with photo and signature", ""],
+      [true, "Pay the fee", "Paid by card · receipt saved", ""],
+      [false, "Upload fingerprints in the app", "Needs a phone with a good camera", "Today"],
+      [false, "Track delivery", "Usually 10–14 working days", "Next"],
+    ];
+    return `<div class="app">${side("track")}<main class="main">${topBar("Passport renewal", "My checklist", false)}
+      <div class="track"><div class="track-in">
+        <div class="card" style="padding:20px 22px">
+          <h4>Progress</h4>
+          <div style="display:flex;align-items:baseline;justify-content:space-between"><b style="font-size:28px;letter-spacing:-0.02em">3 of 5 done</b><span style="font-size:13px;color:var(--muted)">Started 12 Mar</span></div>
+          <div class="progress"><div></div></div>
+          ${items.map(([d, b, s, t]) => `<div class="titem ${d ? "done" : ""}">${box(d)}<div><b>${b}</b><span>${s}</span></div>${t ? `<span class="tag ${t === "Today" ? "warn" : ""}">${t}</span>` : "<span></span>"}</div>`).join("")}
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div class="card"><h4>Up next</h4><p style="margin:0 0 12px;font-size:14.5px;color:var(--body);line-height:1.55">Upload your fingerprints in the passport app. It takes about five minutes.</p><span class="chip" style="display:inline-block;background:var(--green-700);color:#fff;border-color:var(--green-700)">Start now</span></div>
+          <div class="card"><h4>Reminders</h4>
+            <div class="titem" style="border-top:none;padding-top:0;grid-template-columns:1fr auto"><div><b>CNIC expires</b><span>In 8 months</span></div><span class="tag">Set</span></div>
+            <div class="titem" style="grid-template-columns:1fr auto"><div><b>Licence renewal</b><span>Next year</span></div><span class="tag">Set</span></div>
+          </div>
+        </div>
+      </div></div></main></div>`;
+  },
+};
+
+function render() {
+  const key = (location.hash || "#home").slice(1);
+  document.getElementById("root").innerHTML = (views[key] || views.home)();
+}
+window.addEventListener("hashchange", render);
+render();
+</script>
+</body>
+</html>
